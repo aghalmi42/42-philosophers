@@ -6,7 +6,7 @@
 /*   By: aghalmi <aghalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 20:10:08 by aghalmi           #+#    #+#             */
-/*   Updated: 2025/12/23 19:50:19 by aghalmi          ###   ########.fr       */
+/*   Updated: 2025/12/24 22:20:56 by aghalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,15 @@ int						init(t_data *data);
 // time
 long long				getting_time(void);
 void					init_time(t_data *data);
+// routine
+void					print_philo_action(t_philo *philo, char *action);
+void					philo_take_fork(t_philo *philo);
+void					philo_eat(t_philo *philo);
+void					philo_put_fork(t_philo *philo);
+void					philo_sleep(t_philo *philo);
+void					philo_think(t_philo *philo);
+void					*philo_routine(void *av);
+// thread
+int						create_thread(t_data *data);
+int						join_thread(t_data *data);
 #endif

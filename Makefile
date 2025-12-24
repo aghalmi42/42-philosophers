@@ -6,7 +6,7 @@
 #    By: aghalmi <aghalmi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/23 17:37:31 by aghalmi           #+#    #+#              #
-#    Updated: 2025/12/23 19:59:14 by aghalmi          ###   ########.fr        #
+#    Updated: 2025/12/24 22:21:57 by aghalmi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,10 +15,12 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread -g3 -I./include
 
-SRCS =  srcs/parsing.c \
+SRCS =  srcs/main.c \
+		srcs/parsing.c \
 		srcs/init.c \
 		srcs/time.c \
-		srcs/main.c
+		srcs/routine.c \
+		srcs/routine2.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,11 +6,38 @@
 /*   By: aghalmi <aghalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 20:01:29 by aghalmi           #+#    #+#             */
-/*   Updated: 2025/12/23 21:07:30 by aghalmi          ###   ########.fr       */
+/*   Updated: 2025/12/24 22:23:43 by aghalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+int	create_thread(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_philo)
+	{
+		pthread_create(&data->philo[i].thread, NULL, philo_routine,
+			&data->philo[i]);
+		i++;
+	}
+	return (1);
+}
+
+int	join_thread(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->n_philo)
+	{
+		pthread_join(data->philo[i].thread, NULL);
+		i++;
+	}
+	return (1);
+}
 
 int	main(int ac, char **av)
 {
@@ -23,8 +50,15 @@ int	main(int ac, char **av)
 		printf("ERROR\nFail init");
 		return (1);
 	}
-	printf("%d\n", data.n_philo);
-	printf("%d\n", data.die_time);
-	printf("%lld\n", data.time_start);
+	if (!create_thread(&data))
+	{
+		printf("ERROR\nFail create thread\n");
+		return (1);
+	}
+	if (!join_thread(&data))
+	{
+		printf("ERROR\nFail join thread\n");
+		return (1);
+	}
 	return (0);
 }
