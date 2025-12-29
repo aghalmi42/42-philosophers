@@ -1,35 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_bonus.c                                       :+:      :+:    :+:   */
+/*   free_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aghalmi <aghalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/27 23:15:53 by aghalmi           #+#    #+#             */
-/*   Updated: 2025/12/29 22:05:16 by aghalmi          ###   ########.fr       */
+/*   Created: 2025/12/29 21:59:06 by aghalmi           #+#    #+#             */
+/*   Updated: 2025/12/29 22:02:29 by aghalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo_bonus.h"
 
-int	main(int ac, char **av)
+void	free_semaphore(t_data *data)
 {
-	t_data	data;
+	if (data->fork)
+	{
+		sem_close(data->fork);
+		sem_unlink("/fork");
+	}
+	if (data->print_sem)
+	{
+		sem_close(data->print_sem);
+		sem_unlink("/print");
+	}
+	if (data->stop_sem)
+	{
+		sem_close(data->stop_sem);
+		sem_unlink("/stop");
+	}
+	if (data->eat_sem)
+	{
+		sem_close(data->eat_sem);
+		sem_unlink("/eat");
+	}
+}
 
-	if (parsing_argument(ac, av, &data))
-		return (1);
-	if (!init(&data))
-	{
-		printf("ERROR\nFail init");
-		return (1);
-	}
-	if (!create_processus(&data))
-	{
-		printf("ERROR\nFail create processus");
-		free_all(&data);
-		return (1);
-	}
-	wait_processus(&data);
-	free_all(&data);
-	return (0);
+void	free_all(t_data *data)
+{
+	free_semaphore(data);
+	if (data->philo)
+		free(data->philo);
 }

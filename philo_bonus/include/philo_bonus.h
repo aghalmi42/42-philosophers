@@ -6,7 +6,7 @@
 /*   By: aghalmi <aghalmi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 23:05:24 by aghalmi           #+#    #+#             */
-/*   Updated: 2025/12/28 14:57:31 by aghalmi          ###   ########.fr       */
+/*   Updated: 2025/12/29 23:38:54 by aghalmi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,20 @@ int						init(t_data *data);
 void					kill_processus(t_data *data);
 int						create_processus(t_data *data);
 void					wait_processus(t_data *data);
+// routine
+void					print_philo_action(t_philo *philo, char *action);
+void					philo_take_fork(t_philo *philo);
+void					philo_eat(t_philo *philo);
+void					philo_put_fork(t_philo *philo);
+void					philo_sleep(t_philo *philo);
+void					philo_think(t_philo *philo);
+void					philo_routine(t_philo *philo);
+// check
+int						check_dead(t_philo *philo);
+int						check_eat(t_philo *philo);
+void					*check_philo_dead_eat(void *av);
+// free
+void					free_semaphore(t_data *data);
+void					free_all(t_data *data);
 
 #endif
